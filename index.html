@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+body{
+    margin:0;
+    background:#0d47a1;
+    color:white;
+    font-family:Segoe UI;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+#timer{
+    font-size:48px;
+    font-weight:bold;
+}
+</style>
+</head>
+<body>
+
+<div id="timer"></div>
+
+<script>
+const target = new Date("2026-06-26T23:59:59").getTime();
+
+function update(){
+    const now = Date.now();
+    const diff = target - now;
+
+    if(diff<=0){
+        document.getElementById("timer").innerHTML="🎉 Event Started!";
+        return;
+    }
+
+    const days=Math.floor(diff/(1000*60*60*24));
+    const hours=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+    const mins=Math.floor((diff%(1000*60*60))/(1000*60));
+    const secs=Math.floor((diff%(1000*60))/1000);
+
+    document.getElementById("timer").innerHTML=
+        `${days}d ${hours}h ${mins}m ${secs}s`;
+}
+
+setInterval(update,1000);
+update();
+</script>
+
+</body>
+</html>
